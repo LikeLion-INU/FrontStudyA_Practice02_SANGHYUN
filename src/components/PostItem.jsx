@@ -30,10 +30,15 @@ const ContentPreview = styled.p`
 `;
 
 function PostItem({ post }) {
+  // 내용 미리보기 글자 제한
+  const slice = (text, maxLength) => {
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text; // maxLength보다 길면 자르고 "..." 붙임
+  };
+
   return (
     <PostContainer>
       <TitleLink to={`/post/${post.id}`}>{post.title}</TitleLink>
-      <ContentPreview>{post.content}</ContentPreview>
+      <ContentPreview>{slice(post.content, 50)}</ContentPreview>
     </PostContainer>
   );
 }

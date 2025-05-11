@@ -3,7 +3,7 @@ import styled from "styled-components";
 // 버튼 스타일
 const Button = styled.button`
   font-size: 14px;
-  padding: 4px 20px;
+  padding: 8px 28px;
   margin-bottom: 2vh;
   border: 1px solid #ddd;
   border-radius: 8px;

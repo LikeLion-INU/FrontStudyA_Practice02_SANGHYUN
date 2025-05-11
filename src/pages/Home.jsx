@@ -1,4 +1,4 @@
-import React from "react";
+import { React, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
@@ -19,24 +19,16 @@ const PostList = styled.div`
   margin-top: 3vh;
 `;
 
-function Home() {
-  // 글 목록(더미데이터)
-  const dummyPosts = [
-    { id: 1, title: "안녕", content: "하세요" },
-    { id: 2, title: "제", content: "이름은" },
-    { id: 3, title: "임상현", content: "이고요" },
-    { id: 2, title: "코딩왕이", content: "되고 싶습니다" },
-  ];
-
+function Home({ posts }) {
   const navigate = useNavigate();
 
   return (
     <div>
-      <BlogHeader>TITLE</BlogHeader>
+      <BlogHeader>BLOG</BlogHeader>
       <PostList>
         <Button onClick={() => navigate("/new")}>글쓰기</Button>
-        {dummyPosts.map((post) => (
-          <PostItem key={post.id} post={post} />
+        {posts.map(({ id, title, content }) => (
+          <PostItem key={id} post={{ id, title, content }} />
         ))}
       </PostList>
     </div>
