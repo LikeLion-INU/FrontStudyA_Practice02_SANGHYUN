@@ -23,7 +23,7 @@ const InputContent = styled.textarea`
 `;
 
 // 버튼 컨테이너
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-top: 2vh;
@@ -34,14 +34,18 @@ function PostForm({ onSubmit }) {
   const [content, setContent] = useState(""); // 내용 관리 변수
   const navigate = useNavigate();
 
-  // 공백 제출 방지
   const handleSubmit = () => {
+    // 공백 제출 방지
     if (!title.trim() || !content.trim()) {
       alert("제목/내용을 입력해주세요.");
       return;
     }
 
-    onSubmit({ title, content }); // 작성한 데이터를 부모에게 전달
+    // 작성 완료 후 확인창 띄우기
+    const confirm = window.confirm("작성을 완료하시겠습니까?");
+    if (!confirm) return;
+
+    onSubmit({ title, content }); // onSubmit(=handlePostSubmit) 함수 실행
   };
 
   return (

@@ -24,11 +24,11 @@ function Home({ posts }) {
 
   return (
     <div>
-      <BlogHeader>BLOG</BlogHeader>
+      <BlogHeader>MINI BLOG</BlogHeader>
       <PostList>
         <Button onClick={() => navigate("/new")}>글쓰기</Button>
-        {posts.map(({ id, title, content }) => (
-          <PostItem key={id} post={{ id, title, content }} />
+        {posts.map((item) => (
+          <PostItem key={item.id} post={item} /> // PostItem에 key와 post를 넘김
         ))}
       </PostList>
     </div>

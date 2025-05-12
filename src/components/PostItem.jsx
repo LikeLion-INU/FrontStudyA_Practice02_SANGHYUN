@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-// 글 하나를 박스 형태로 보여주는 컴포넌트
+// 전체 컨테이너
 const PostContainer = styled.div`
   border: 1px solid #ddd;
   padding: 2vw;
