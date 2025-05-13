@@ -22,7 +22,7 @@ const TitleLink = styled(Link)`
   }
 `;
 
-// 내용 미리보기 텍스트
+// 내용 미리보기
 const ContentPreview = styled.p`
   color: #666;
   margin-top: 1vh;

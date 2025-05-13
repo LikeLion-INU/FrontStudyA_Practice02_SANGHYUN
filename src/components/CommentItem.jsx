@@ -24,7 +24,7 @@ function CommentItem({ comment }) {
   return (
     <ItemContainer>
       <Content>{comment.content}</Content>
-      {comment.date && <Date>{comment.date}</Date>}
+      <Date>{comment.date}</Date>
     </ItemContainer>
   );
 }

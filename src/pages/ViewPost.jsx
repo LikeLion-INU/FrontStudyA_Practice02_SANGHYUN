@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
 import CommentForm from "../components/CommentForm";
@@ -46,6 +46,7 @@ const CommentArea = styled.div`
 function ViewPost({ posts, setPosts }) {
   const { id } = useParams(); // URL에서 id만 추출
   const post = posts.find((item) => item.id === parseInt(id)); // 해당 글 탐색
+  const navigate = useNavigate();
 
   const handleAddComment = (commentText) => {
     const now = new Date().toISOString().slice(0, 16).replace("T", " "); // 현재 시각을 "2025-00-00 00:00" 형태로 변환
@@ -60,11 +61,23 @@ function ViewPost({ posts, setPosts }) {
     setPosts(updatedPosts);
   };
 
+  const handleDeletePost = () => {
+    const confirm = window.confirm("정말 삭제하시겠습니까?");
+    if (!confirm) return;
+
+    const updated = posts.filter((item) => item.id !== post.id); // 지금 보는 게시물을 제외하고 나머지만 남김
+    setPosts(updated);
+    navigate("/");
+  };
+
   if (!post) return <p>존재하지 않는 글입니다.</p>;
 
   return (
     <Container>
       <PostBox>
+        <Button style={{ padding: "5px" }} onClick={handleDeletePost}>
+          삭제
+        </Button>
         <Title>{post.title}</Title>
         <Content>{post.content}</Content>
       </PostBox>

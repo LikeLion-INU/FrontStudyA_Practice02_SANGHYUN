@@ -7,15 +7,17 @@
 ## 📁 파일 구성
 
 ```
-├─ components
-│  ├─ Button.jsx          # 버튼 공통 스타일
-│  ├─ CommentForm.jsx     # 댓글 작성 폼
-│  ├─ PostForm.jsx        # 게시물 작성 폼
-│  └─ PostItem.jsx        # 게시물 목록
-├─ pages
-│  ├─ Home.jsx            # 메인 페이지 (글 목록)
-│  ├─ ViewPost.jsx        # 게시물 자세히 보기
-│  └─ WriteNew.jsx        # 새 게시물 작성
+src
+ ├─ components
+ │  ├─ Button.jsx          # 버튼 공통 스타일
+ │  ├─ CommentForm.jsx     # 댓글 작성 폼
+ │  ├─ CommentItem.jsx     # 댓글 목록
+ │  ├─ PostForm.jsx        # 게시물 작성 폼
+ │  └─ PostItem.jsx        # 게시물 목록
+ ├─ pages
+ │  ├─ Home.jsx            # 메인 페이지 (글 목록)
+ │  ├─ ViewPost.jsx        # 게시물 자세히 보기
+ │  └─ WriteNew.jsx        # 새 게시물 작성
 ```
 
 ---
