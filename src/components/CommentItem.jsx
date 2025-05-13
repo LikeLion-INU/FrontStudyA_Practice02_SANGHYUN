@@ -14,7 +14,7 @@ const Content = styled.p`
   margin: 0 0 0.5rem 0;
 `;
 
-// 날짜
+// 댓글 작성 날짜
 const Date = styled.span`
   font-size: 13px;
   color: #888;

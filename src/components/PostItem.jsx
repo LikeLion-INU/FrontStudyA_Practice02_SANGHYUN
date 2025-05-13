@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-// 전체 컨테이너
+// 글 박스 컨테이너
 const PostContainer = styled.div`
   border: 1px solid #ddd;
   padding: 2vw;
@@ -10,7 +10,7 @@ const PostContainer = styled.div`
   border-radius: 8px;
 `;
 
-// 제목 (링크)
+// 글 제목 (링크)
 const TitleLink = styled(Link)`
   font-size: 20px;
   font-weight: bold;
@@ -22,7 +22,7 @@ const TitleLink = styled(Link)`
   }
 `;
 
-// 내용 미리보기
+// 글 내용 미리보기
 const ContentPreview = styled.p`
   color: #666;
   margin-top: 1vh;
@@ -30,14 +30,14 @@ const ContentPreview = styled.p`
 `;
 
 function PostItem({ post }) {
-  // 내용 미리보기 글자 제한
+  // 미리보기 글자수 제한 함수
   const slice = (text, maxLength) => {
     return text.length > maxLength ? text.slice(0, maxLength) + "..." : text; // maxLength보다 길면 자르고 "..." 붙임
   };
 
   return (
     <PostContainer>
-      <TitleLink to={`/post/${post.id}`}>{post.title}</TitleLink>
+      <TitleLink to={`/post/${post.id}`}>{post.title}</TitleLink> {/* 제목 클릭 시 상세페이지로 이동 */}
       <ContentPreview>{slice(post.content, 50)}</ContentPreview>
     </PostContainer>
   );

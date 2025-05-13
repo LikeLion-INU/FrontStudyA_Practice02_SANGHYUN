@@ -11,20 +11,20 @@ const Container = styled.div`
   padding: 3vw;
 `;
 
-// 글 박스
+// 게시물 상세보기 박스
 const PostBox = styled.div`
   padding: 7vh;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 `;
 
-// 제목
+// 제목 영역
 const Title = styled.h2`
   font-size: 28px;
   font-weight: bold;
 `;
 
-// 내용
+// 내용 영역
 const Content = styled.p`
   font-size: 18px;
   line-height: 1.6;
@@ -38,7 +38,7 @@ const SectionDivider = styled.hr`
   border-top: 1px solid #eee;
 `;
 
-// 댓글창
+// 댓글 영역
 const CommentArea = styled.div`
   margin-top: 2vh;
 `;
@@ -48,6 +48,7 @@ function ViewPost({ posts, setPosts }) {
   const post = posts.find((item) => item.id === parseInt(id)); // 해당 글 탐색
   const navigate = useNavigate();
 
+  // 댓글 추가 함수
   const handleAddComment = (commentText) => {
     const now = new Date().toISOString().slice(0, 16).replace("T", " "); // 현재 시각을 "2025-00-00 00:00" 형태로 변환
     const newComment = { content: commentText, date: now }; // 새로운 댓글 객체 생성
@@ -58,19 +59,21 @@ function ViewPost({ posts, setPosts }) {
         : item
     );
 
-    setPosts(updatedPosts);
+    setPosts(updatedPosts); // 댓글 데이터 업데이트
   };
 
+  // 게시물 삭제 함수
   const handleDeletePost = () => {
+    // 삭제 확인창 띄우기
     const confirm = window.confirm("정말 삭제하시겠습니까?");
     if (!confirm) return;
 
     const updated = posts.filter((item) => item.id !== post.id); // 지금 보는 게시물을 제외하고 나머지만 남김
-    setPosts(updated);
+    setPosts(updated); // 게시물 데이터 업데이트 후 메인 페이지로 이동
     navigate("/");
   };
 
-  if (!post) return <p>존재하지 않는 글입니다.</p>;
+  if (!post) return <p>존재하지 않는 글입니다.</p>; // 예외처리
 
   return (
     <Container>
