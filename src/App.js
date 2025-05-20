@@ -1,69 +1,88 @@
-import { react, useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useEffect, useState } from "react";
+import { AuthProvider } from "./contexts/AuthContext";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
 import Home from "./pages/Home";
 import ViewPost from "./pages/ViewPost";
 import WriteNew from "./pages/WriteNew";
+import instance from "./api/axiosInstance";
 
 function App() {
-  // 글/댓글 목록(더미데이터)
-  const [posts, setPosts] = useState([
-    {
-      id: 1,
-      title: "치킨은 언제나 옳다",
-      content: "야근하고 먹는 치킨은 왜 이렇게 맛있을까요?",
-      comments: [
-        {
-          content: "이 글에 치킨 향이 나는 것 같아요",
-          date: "2025-05-11 18:00",
-        },
-        { content: "순살이냐 뼈냐, 그것이 문제로다", date: "2025-05-11 18:03" },
-      ],
-    },
-    {
-      id: 2,
-      title: "자바스크립트와 나의 평행이론",
-      content: "이해하면 사라지고, 모르면 나오는 JS... 나만 그래?",
-      comments: [
-        { content: "JS는 살아있는 생명체야...", date: "2025-05-11 14:40" },
-      ],
-    },
-    {
-      id: 3,
-      title: "꿈에서 출근했는데 진짜 출근하래",
-      content: "꿈에서 이미 일 다 했는데 왜 또 해야 하죠?",
-      comments: [
-        {
-          content: "그건 꿈속의 너고 지금은 현실이지...",
-          date: "2025-05-11 09:20",
-        },
-        { content: "꿈에서도 과장님 보고 싶었잖아~", date: "2025-05-11 09:21" },
-      ],
-    },
-    {
-      id: 4,
-      title: "고양이가 내 키보드를 점령했다",
-      content: "코딩 좀 하려는데 자꾸 눌러앉아요... 이건 고양이도구화인가요?",
-      comments: [
-        { content: "이젠 IDE 말고 C-A-T 쓰셔야죠", date: "2025-05-11 11:10" },
-      ],
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const fetchPosts = async () => {
+    try {
+      const res = await instance.get("/660/posts");
+      setPosts(res.data);
+    } catch (err) {
+      console.error("게시글 가져오기 실패:", err.response?.data || err.message);
+    }
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLoggedIn(true);
+      fetchPosts(); // 토큰이 있을 때만 게시글 가져오기
+    }
+  }, []);
 
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home posts={posts} />} />
-        <Route
-          path="/post/:id"
-          element={<ViewPost posts={posts} setPosts={setPosts} />}
-        />
-
-        <Route
-          path="/new"
-          element={<WriteNew posts={posts} setPosts={setPosts} />}
-        />
-      </Routes>
-    </Router>
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route
+            path="/login"
+            element={
+              <LoginPage
+                onLoginSuccess={() => {
+                  setIsLoggedIn(true);
+                  fetchPosts(); // 로그인 성공 시 게시글 다시 불러오기
+                }}
+              />
+            }
+          />
+          <Route path="/signup" element={<SignupPage />} />
+          <Route
+            path="/"
+            element={
+              isLoggedIn ? (
+                <Home posts={posts} />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/post/:id"
+            element={
+              isLoggedIn ? (
+                <ViewPost posts={posts} setPosts={setPosts} />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+          <Route
+            path="/new"
+            element={
+              isLoggedIn ? (
+                <WriteNew posts={posts} setPosts={setPosts} />
+              ) : (
+                <Navigate to="/login" replace />
+              )
+            }
+          />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 

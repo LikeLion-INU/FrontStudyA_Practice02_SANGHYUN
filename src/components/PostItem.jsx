@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
 
-// ±Û ¹Ú½º ÄÁÅ×ÀÌ³Ê
+// ê¸€ ë°•ìŠ¤ ì»¨í…Œì´ë„ˆ
 const PostContainer = styled.div`
   border: 1px solid #ddd;
   padding: 2vw;
@@ -10,7 +10,7 @@ const PostContainer = styled.div`
   border-radius: 8px;
 `;
 
-// ±Û Á¦¸ñ (¸µÅ©)
+// ê¸€ ì œëª© (ë§í¬)
 const TitleLink = styled(Link)`
   font-size: 20px;
   font-weight: bold;
@@ -18,11 +18,11 @@ const TitleLink = styled(Link)`
   text-decoration: none;
 
   &:hover {
-    text-decoration: underline; // ¸¶¿ì½º ¿Ã·Á³õÀ» ¶§¸¸ ¹ØÁÙ Ç¥½Ã
+    text-decoration: underline; // ë§ˆìš°ìŠ¤ ì˜¬ë ¤ë†“ì„ ë•Œë§Œ ë°‘ì¤„ í‘œì‹œ
   }
 `;
 
-// ±Û ³»¿ë ¹Ì¸®º¸±â
+// ê¸€ ë‚´ìš© ë¯¸ë¦¬ë³´ê¸°
 const ContentPreview = styled.p`
   color: #666;
   margin-top: 1vh;
@@ -30,14 +30,14 @@ const ContentPreview = styled.p`
 `;
 
 function PostItem({ post }) {
-  // ¹Ì¸®º¸±â ±ÛÀÚ¼ö Á¦ÇÑ ÇÔ¼ö
+  // ë¯¸ë¦¬ë³´ê¸° ê¸€ììˆ˜ ì œí•œ í•¨ìˆ˜
   const slice = (text, maxLength) => {
-    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text; // maxLengthº¸´Ù ±æ¸é ÀÚ¸£°í "..." ºÙÀÓ
+    return text.length > maxLength ? text.slice(0, maxLength) + "..." : text; // maxLengthë³´ë‹¤ ê¸¸ë©´ ìë¥´ê³  "..." ë¶™ì„
   };
 
   return (
     <PostContainer>
-      <TitleLink to={`/post/${post.id}`}>{post.title}</TitleLink> {/* Á¦¸ñ Å¬¸¯ ½Ã »ó¼¼ÆäÀÌÁö·Î ÀÌµ¿ */}
+      <TitleLink to={`/post/${post.id}`}>{post.title}</TitleLink> {/* ì œëª© í´ë¦­ ì‹œ ìƒì„¸í˜ì´ì§€ë¡œ ì´ë™ */}
       <ContentPreview>{slice(post.content, 50)}</ContentPreview>
     </PostContainer>
   );

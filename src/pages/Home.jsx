@@ -1,4 +1,4 @@
-import { React } from "react";
+import { React, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Button from "../components/Button";
@@ -21,6 +21,14 @@ const PostList = styled.div`
 
 function Home({ posts }) {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (!token) {
+      alert("로그인이 필요합니다.");
+      navigate("/login");
+    }
+  }, [navigate]);
 
   return (
     <div>

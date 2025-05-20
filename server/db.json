@@ -1,0 +1,38 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "email": "test@test.com",
+      "password": "$2a$10$jxVG3/3DGqoYVz5LrVm.wOtbl6I1DujUPBDhjVrYoS2WQiEqBAHH2",
+      "name": "test"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "title": "이거 왜 이렇게 어렵나요?????????????????????????????????????????????????",
+      "content": "지금은01시27분입니다",
+      "comments": [
+        {
+          "content": "살려주세요",
+          "date": "2025-05-20 18:00"
+        },
+        {
+          "content": "살려주세요22",
+          "date": "2025-05-20 18:03"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "진짜 죄송합니다.. 분기처리는 이해를 못하겠어요",
+      "content": "최선을다하긴했는데..",
+      "comments": [
+        {
+          "content": "살려주세요",
+          "date": "2025-05-20 14:40"
+        }
+      ]
+    }
+  ]
+}
